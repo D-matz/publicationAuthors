@@ -5,8 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class publications {
-	//excluding authors such as Thi Kim Phung Dang whose names have no commas
-	//Amelia Rutledge appears as having published but not as faculty
+	//put faculty first names in "authorFirst", faculty last names in "authors". The order of the names in both files should be the same but it doesn't matter what the particular order is.
+	//put article authors in "articleAuthors". First and last names should be separated by commas, authors by semicolons.
+	//for who published what in what journal put titles in "articleTitles" and journals in "journals".
+	//the authors, titles, and journals should all be in the same order, again it only matters that the order is the same, not what it is
+	//if you copy paste them all into their respective files from a spreadsheet without reordering the spreadsheet it will work
 	public static void main (String [] args)
 	{
 		String [][] authors = new String [255][2];
