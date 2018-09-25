@@ -1,3 +1,5 @@
+package run;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -42,41 +44,23 @@ public class publications {
 		{
 			System.out.println(authors[i][0]+" "+authors[i][1]);
 		}*/
-		try
+		String [][] articleInfo = new String [3511][5];
+		String [] names = {"colB","colJ","colR","colAF","colAG"};
+		for(int col=0;col<5;col++)
 		{
-			inputStream=new Scanner(new FileInputStream("articleTitles"));
-		}
-		catch(FileNotFoundException e)
-		{
-			System.out.println("dun goofed");
-		}
-		String [] articleTitles = new String [1589];
-		for(int i=0;i<1589;i++)
-		{
-			articleTitles[i] = inputStream.nextLine();
-		}
-		inputStream.close();
-		try
-		{
-			inputStream=new Scanner(new FileInputStream("journals"));
-		}
-		catch(FileNotFoundException e)
-		{
-			System.out.println("dun goofed");
-		}
-		String [] journals = new String [1589];
-		for(int i=0;i<1589;i++)
-		{
-			journals[i] = inputStream.nextLine();
-		}
-		inputStream.close();
-		try
-		{
-			inputStream=new Scanner(new FileInputStream("articleAuthors"));
-		}
-		catch(FileNotFoundException e)
-		{
-			System.out.println("dun goofed");
+			try
+			{
+				inputStream=new Scanner(new FileInputStream(names[col]));
+			}
+			catch(FileNotFoundException e)
+			{
+				System.out.println("dun goofed");
+			}
+			for(int i=0;i<3511;i++)
+			{
+				articleInfo[i][col] = inputStream.nextLine().trim();
+			}
+			inputStream.close();
 		}
 		int c = 0;
 		String [] verify = new String[255];
@@ -84,10 +68,9 @@ public class publications {
 		{
 			verify[i]="";
 		}
-		int a = 0;
-		while(inputStream.hasNext())
+		for(int a=0;a<3511;a++)
 		{
-			String line = inputStream.nextLine();
+			String line = articleInfo[a][0];
 			int count = 1+line.length() - line.replace(";", "").length();
 			//System.out.println(line+" "+count);
 			String [] authorList = new String[count];
@@ -116,7 +99,8 @@ public class publications {
 						if((before.contains(firstFull)&&after.contains(lastFull))||(before.contains(lastFull)&&after.contains(firstFull)))
 						{
 							c++;
-							verify[j] = verify[j]+"\n"+articleTitles[a]+". "+journals[a]+".";
+							//i = count;
+							verify[j] = verify[j]+"\n"+articleInfo[a][1]+". "+articleInfo[a][2]+". "+articleInfo[a][3]+". "+articleInfo[a][4]+". ";
 						//	System.out.println(firstFull+","+lastFull);
 						}
 				/*		else if((before.equals(""+firstFull.charAt(0))&&after.contains(lastFull))||(before.equals(""+lastFull.charAt(0))&&after.contains(firstFull)))
@@ -130,12 +114,11 @@ public class publications {
 					}
 				}
 			}
-			a++;
 		}
 		inputStream.close();
 		for(int i=0;i<255;i++)
 		{
-			System.out.println(authors[i][0]+" "+authors[i][1]+":"+verify[i]);
+			System.out.println(authors[i][0]+" "+authors[i][1]+": "+verify[i]);
 		}
 		System.out.println(c);
 	}
